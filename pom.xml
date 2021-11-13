@@ -5,9 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   
   <properties>
-  <java.version>16</java.version></properties>
+  <java.version>16</java.version>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-</project>
+</properties>
 
 <build>
 <plugins>
@@ -23,3 +23,4 @@
 </plugin>
 </plugins>
 </build>
+</project>
