@@ -3,6 +3,7 @@ package app.cleancode;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,5 +22,8 @@ public class Entrypoint {
         System.out.print("Please type a sentence: ");
         String sentence = reader.readLine();
         logger.fine("Received sentence: " + sentence);
+        Lexer lexer = new Lexer();
+        List<String> tokens = lexer.lex(sentence);
+        logger.fine("Found tokens: " + tokens.toString());
     }
 }
