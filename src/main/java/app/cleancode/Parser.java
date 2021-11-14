@@ -50,7 +50,7 @@ public class Parser {
         String name = tokens.get(position++);
         logger.fine("Found adjectives: " + adjectives.toString() + " and name " + name);
         if (!isNoun(name)) {
-            logger.warning(String.format("Name %s may not be a noun", name));
+            throw new IllegalArgumentException("Name " + name + " is not a noun");
         }
         return new Noun(adjectives, name);
     }
