@@ -22,10 +22,11 @@ public class Entrypoint {
         logger.fine("Received sentence: " + sentence);
         Lexer lexer = new Lexer();
         List<String> tokens = lexer.lex(sentence);
-        logger.fine("Checking word types");
+        logger.info("Categorizing words");
         List<Word> words = tokens.stream().map(Word::new).collect(Collectors.toList());
         logger.fine("Found tokens: " + words.toString());
         Parser parser = new Parser(words);
+        logger.info("Parsing");
         parser.parse();
     }
 }

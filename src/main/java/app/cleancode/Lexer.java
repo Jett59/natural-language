@@ -8,7 +8,7 @@ public class Lexer {
     private static final Logger logger = Logger.getLogger(Lexer.class.getName());
 
     public List<String> lex(String sentence) {
-        logger.fine("Lexing " + sentence);
+        logger.info("Lexing");
         List<String> result = new ArrayList<>();
         String temp = "";
         for (int i = 0; i < sentence.length(); i++) {
