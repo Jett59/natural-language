@@ -17,16 +17,21 @@ public class Entrypoint {
         Logger packageLogger = logger.getParent();
         packageLogger.setLevel(Level.FINE);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Please type a sentence: ");
-        String sentence = reader.readLine();
-        logger.fine("Received sentence: " + sentence);
-        Lexer lexer = new Lexer();
-        List<String> tokens = lexer.lex(sentence);
-        logger.info("Categorizing words");
-        List<Word> words = tokens.stream().map(Word::new).collect(Collectors.toList());
-        logger.fine("Found tokens: " + words.toString());
-        Parser parser = new Parser(words);
-        logger.info("Parsing");
-        parser.parse();
+        while (true) {
+            System.out.print("Please type a sentence or 'stop' to cancel: ");
+            String sentence = reader.readLine();
+            if (sentence.equalsIgnoreCase("stop")) {
+                break;
+            }
+            logger.fine("Received sentence: " + sentence);
+            Lexer lexer = new Lexer();
+            List<String> tokens = lexer.lex(sentence);
+            logger.info("Categorizing words");
+            List<Word> words = tokens.stream().map(Word::new).collect(Collectors.toList());
+            logger.fine("Found tokens: " + words.toString());
+            Parser parser = new Parser(words);
+            logger.info("Parsing");
+            parser.parse();
+        }
     }
 }
