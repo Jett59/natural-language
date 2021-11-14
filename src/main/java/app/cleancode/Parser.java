@@ -32,7 +32,13 @@ public class Parser {
                 throw new IllegalArgumentException(
                         "Unexpected end of token list while searching for a noun");
             }
-            adjectives.add(tokens.get(position).word());
+            Word currentWord = tokens.get(position);
+            Word nextWord = position + 1 == tokens.size() ? null : tokens.get(position + 1);
+            if (nextWord == null || (!nextWord.adjective() && !nextWord.noun())) {
+                break;
+            } else {
+                adjectives.add(currentWord.word());
+            }
             position++;
         }
         Word name = tokens.get(position++);
