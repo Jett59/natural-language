@@ -15,9 +15,6 @@ public class Entrypoint {
                 .forEach(handler -> handler.setLevel(Level.ALL));
         Logger packageLogger = logger.getParent();
         packageLogger.setLevel(Level.FINE);
-        logger.info("Setting up");
-        logger.fine(String.format("Found %d nouns", WordLists.nouns.size()));
-        logger.info("Setup complete");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Please type a sentence: ");
         String sentence = reader.readLine();
@@ -25,5 +22,7 @@ public class Entrypoint {
         Lexer lexer = new Lexer();
         List<String> tokens = lexer.lex(sentence);
         logger.fine("Found tokens: " + tokens.toString());
+        Parser parser = new Parser(tokens);
+        parser.parse();
     }
 }
