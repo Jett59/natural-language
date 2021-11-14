@@ -21,11 +21,15 @@ public class Parser {
     }
 
     private boolean isNoun(String word) {
-        return WordLists.nouns.contains(word);
+        return WordLists.nouns.contains(word.toLowerCase());
     }
 
     private boolean isPreposition(String word) {
-        return WordLists.prepositions.contains(word);
+        return WordLists.prepositions.contains(word.toLowerCase());
+    }
+
+    private boolean isAdjective(String word) {
+        return WordLists.adjectives.contains(word.toLowerCase());
     }
 
     private Noun parseNoun() {
@@ -35,7 +39,7 @@ public class Parser {
                 || firstWord.equalsIgnoreCase("the") || firstWord.equalsIgnoreCase("some")) {
             position++;
         }
-        while (!isNoun(tokens.get(position))) {
+        while (isAdjective(tokens.get(position))) {
             if (position == tokens.size()) {
                 throw new IllegalArgumentException(
                         "Unexpected end of token list while searching for a noun");
@@ -45,6 +49,9 @@ public class Parser {
         }
         String name = tokens.get(position++);
         logger.fine("Found adjectives: " + adjectives.toString() + " and name " + name);
+        if (!isNoun(name)) {
+            logger.warning(String.format("Name %s may not be a noun", name));
+        }
         return new Noun(adjectives, name);
     }
 }
