@@ -13,4 +13,9 @@ public class WordLists {
     public static final Set<String> adjectives =
             Collections.unmodifiableSet(Resources.getLines("/adjectives.txt").stream()
                     .map(String::toLowerCase).collect(Collectors.toSet()));
+    public static final Set<String> adverbs =
+            Collections.unmodifiableSet(Resources.getLines("/adverbs.txt").stream()
+                    .map(String::toLowerCase).collect(Collectors.toSet()));
+    public static final Set<String> verbs = Collections.unmodifiableSet(Resources
+            .getLines("/verbs.txt").stream().map(String::toLowerCase).collect(Collectors.toSet()));
 }

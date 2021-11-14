@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class Entrypoint {
     private static final Logger logger = Logger.getLogger(Entrypoint.class.getName());
@@ -21,8 +22,10 @@ public class Entrypoint {
         logger.fine("Received sentence: " + sentence);
         Lexer lexer = new Lexer();
         List<String> tokens = lexer.lex(sentence);
-        logger.fine("Found tokens: " + tokens.toString());
-        Parser parser = new Parser(tokens);
+        logger.fine("Checking word types");
+        List<Word> words = tokens.stream().map(Word::new).collect(Collectors.toList());
+        logger.fine("Found tokens: " + words.toString());
+        Parser parser = new Parser(words);
         parser.parse();
     }
 }
